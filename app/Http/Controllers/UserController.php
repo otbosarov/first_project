@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use PhpParser\Node\Expr\FuncCall;
 
 class UserController extends Controller
 {
@@ -49,5 +50,15 @@ class UserController extends Controller
         } else {
             return "Amaliyot bajarish uchun huquq yo'q";
         }
+    }
+
+    public function show(int $id){
+        $user = User::find($id);
+       if (!$user){
+        return response()->json(["message" => "Foydalanuvchi topilmadi"], 404);
+       }
+       else{
+        return $user;
+       }
     }
 }
